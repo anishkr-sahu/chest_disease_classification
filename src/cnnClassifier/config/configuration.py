@@ -1,6 +1,6 @@
 from cnnClassifier.constants import *
 from cnnClassifier.utils.common import read_yaml, create_directories
-from cnnClassifier.entity.config_entity import (DataIngestionConfig,PrepareBaseModelConfig, TrainingConfig,EvaluationConfig )
+from cnnClassifier.entity.config_entity import (DataIngestionConfig,PrepareBaseModelConfig, TrainingConfig,EvaluationConfig,ModelPusherConfig )
 import os
 
 class ConfigurationManager:
@@ -80,3 +80,11 @@ class ConfigurationManager:
             params_batch_size=self.params.BATCH_SIZE
         )
         return eval_config
+
+    def get_model_pusher_config(self) -> ModelPusherConfig:
+        model_pusher_config = ModelPusherConfig(
+            bucket_name=AWS_BUCKET_NAME,
+            pusher_s3_key=MODEL_PUSHER_S3_KEY,
+            base_model_path=Path("artifacts/training/model.h5")
+        )
+        return model_pusher_config

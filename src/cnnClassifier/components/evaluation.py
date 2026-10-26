@@ -26,7 +26,7 @@ class Evaluation:
     def _valid_generator(self):
         datagenerator_kwargs = dict(
             rescale = 1./255,
-            validation_split=0.30
+            validation_split=0.20
         )
 
         dataflow_kwargs = dict(
