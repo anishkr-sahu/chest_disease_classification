@@ -30,9 +30,10 @@ def home():
 @app.route("/train", methods=['GET','POST'])
 @cross_origin()
 def trainRoute():
-    # os.system("python main.py")
-    os.system("dvc repro")
-    return "Training done successfully!"
+    exit_code = os.system("dvc repro --force")
+    if exit_code != 0:
+        return f"Training failed with exit code {exit_code}", 500
+    return "Training and S3 upload done successfully!"
 
 
 @app.route("/predict", methods=['POST'])
